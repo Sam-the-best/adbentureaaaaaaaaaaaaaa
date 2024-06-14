@@ -185,10 +185,145 @@ controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
     )
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
-    sprites.destroy(otherSprite, effects.disintegrate, 5000)
+    sprites.destroy(otherSprite, effects.fire, 5000)
+    info.changeScoreBy(1)
+    myEnemy = sprites.create(img`
+        . . . . c c c c c c c . . . . . 
+        . . . c 6 7 7 7 7 7 6 c . . . . 
+        . . c 6 7 c 6 6 6 6 c 7 c . . . 
+        . . c 7 7 6 f 6 6 f 6 7 6 c . . 
+        . . c 7 7 7 7 7 7 7 7 7 7 c . . 
+        . . f 7 7 7 6 1 f f 1 8 7 f . . 
+        . . f 7 7 7 f 1 f f 1 f 6 f . . 
+        . . f 6 7 7 f 2 2 2 2 f f . . . 
+        . . c f 6 7 7 2 2 2 2 f c c . . 
+        . c 7 7 c c 7 7 7 7 7 7 7 7 c . 
+        c 7 7 7 6 c f 7 7 7 7 1 1 1 7 c 
+        c c 6 6 6 c c f 6 7 1 1 1 1 1 f 
+        . . c 6 6 6 c 6 6 1 1 1 1 1 1 f 
+        . . c 6 6 6 6 6 6 1 1 1 1 1 6 f 
+        . . . c 6 6 6 6 1 1 1 1 1 6 f . 
+        . . . . c c c c c c c c f f . . 
+        `, SpriteKind.Enemy)
+    myEnemy.follow(mySprite, speed)
+    tiles.placeOnRandomTile(myEnemy, sprites.castle.tileGrass2)
+    animation.runImageAnimation(
+    myEnemy,
+    [img`
+        . . . . c c c c c c c . . . . . 
+        . . . c 6 7 7 7 7 7 6 c . . . . 
+        . . c 6 7 c 6 6 6 6 c 7 c . . . 
+        . . c 7 7 6 f 6 6 f 6 7 6 c . . 
+        . . c 7 7 7 7 7 7 7 7 7 7 c . . 
+        . . f 7 7 7 6 1 f f 1 8 7 f . . 
+        . . f 7 7 7 f 1 f f 1 f 6 f . . 
+        . . f 6 7 7 f 2 2 2 2 f f . . . 
+        . . c f 6 7 7 2 2 2 2 f c c . . 
+        . c 7 7 c c 7 7 7 7 7 7 7 7 c . 
+        c 7 7 7 6 c f 7 7 7 7 1 1 1 7 c 
+        c c 6 6 6 c c f 6 7 1 1 1 1 1 f 
+        . . c 6 6 6 c 6 6 1 1 1 1 1 1 f 
+        . . c 6 6 6 6 6 6 1 1 1 1 1 6 f 
+        . . . c 6 6 6 6 1 1 1 1 1 6 f . 
+        . . . . c c c c c c c c f f . . 
+        `,img`
+        . . . c c c c c c c . . . . . . 
+        . . c 7 f f 6 6 f f c . . . . . 
+        . c 6 7 6 6 6 6 6 6 7 c . . . . 
+        . c 7 7 7 7 7 7 7 7 7 7 c . . . 
+        . c 7 7 7 6 1 f f 1 8 7 c . . . 
+        . f 7 7 7 f 1 f f 1 f 6 f . . . 
+        . f 7 7 7 f 2 2 2 2 f 6 f . . . 
+        . f 6 7 7 f 2 2 2 2 f 6 c c . . 
+        . . c f 7 7 2 2 2 2 7 7 7 7 c . 
+        . c 7 7 c c 7 7 7 7 7 1 1 1 7 c 
+        c 7 7 7 6 c f 7 7 7 1 1 1 1 1 f 
+        c c 6 6 6 c c f 6 1 1 1 1 1 1 f 
+        . . c 6 6 6 c 6 6 1 1 1 1 1 6 f 
+        . . c 6 6 6 6 6 6 1 1 1 1 1 6 f 
+        . . . c 6 6 6 6 6 1 1 1 1 6 f . 
+        . . . . c c c c c c c c f f . . 
+        `,img`
+        . . . c c c c c c c . . . . . . 
+        . . c 7 f f 6 6 f f c . . . . . 
+        . c 6 7 6 6 6 6 6 6 7 c . . . . 
+        . c 7 7 7 7 7 7 7 7 7 7 c . . . 
+        . c 7 7 7 6 1 f f 1 8 7 c . . . 
+        . f 7 7 7 f 1 f f 1 f 6 f . . . 
+        . f 7 7 7 f 2 2 2 2 f 6 f . . . 
+        . f 6 7 7 f 2 2 2 2 f 6 c c . . 
+        . . c f 7 7 2 2 2 2 7 7 7 7 c . 
+        . c 7 7 c c 7 7 7 7 7 1 1 1 7 c 
+        c 7 7 7 6 c f 7 7 7 1 1 1 1 1 f 
+        c c 6 6 6 c c f 6 1 1 1 1 1 1 f 
+        . . c 6 6 6 c 6 6 1 1 1 1 1 6 f 
+        . . c 6 6 6 6 6 6 1 1 1 1 1 6 f 
+        . . . c 6 6 6 6 6 1 1 1 1 6 f . 
+        . . . . c c c c c c c c f f . . 
+        `,img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        c c c c c . . . . . . . . . . . 
+        c 6 7 7 7 c c . . . . . . . . . 
+        . c c 7 7 7 c c . . . . . . . . 
+        . . . c 7 7 6 c . . . . . . . . 
+        . . . c 6 6 6 c . . . . . . . . 
+        . . c c 6 6 6 c c c c c c . . . 
+        . c 6 6 6 c c 6 7 7 7 7 6 c . . 
+        c c 6 6 6 c 7 7 7 7 7 7 7 7 c . 
+        c 6 6 6 c 6 7 7 7 7 7 7 7 7 6 c 
+        c 6 6 6 c 7 7 7 c 6 6 6 6 c 7 c 
+        c 6 6 6 f 7 7 7 c c 6 6 c c 7 f 
+        c 6 6 6 f 7 7 7 6 f 6 6 f 6 7 f 
+        . c c 6 6 f 6 7 c 1 f f c 1 c . 
+        . . . c c c c c c c c c c c c . 
+        `,img`
+        c c c c c . . . . . . . . . . . 
+        c 6 7 7 7 c c . . . . . . . . . 
+        . c c 7 7 7 c c . . . . . . . . 
+        . . . c 7 7 6 c . . . . . . . . 
+        . . . c 6 6 6 c . . . . . . . . 
+        . . c c 6 6 6 c . . . . . . . . 
+        . c c 6 6 6 c c c c c c c . . . 
+        . c 6 6 6 c c 6 7 7 7 7 6 c . . 
+        c c 6 6 6 c 7 7 7 7 7 7 7 7 c . 
+        c 6 6 6 c 6 7 7 7 7 7 7 7 7 6 c 
+        c 6 6 6 c 7 7 7 c 6 6 6 6 c 7 c 
+        c 6 6 6 f 7 7 7 c c 6 6 c c 7 f 
+        c 6 6 6 f 7 7 7 6 f 6 6 f 6 7 f 
+        . c 6 6 f 6 7 7 7 7 7 7 7 7 f . 
+        . c c 6 6 f 6 7 c 1 f f c 1 c . 
+        . . . c c c c c c c c c c c c . 
+        `,img`
+        c c c c c . . . . . . . . . . . 
+        c 6 7 7 7 c c . . . . . . . . . 
+        . c c 7 7 7 c c . . . . . . . . 
+        . . . c 7 7 6 c . . . . . . . . 
+        . . . c 6 6 6 c . . . . . . . . 
+        . . c c 6 6 6 c . . . . . . . . 
+        . c c 6 6 6 c c c c c c c . . . 
+        . c 6 6 6 c c 6 7 7 7 7 6 c . . 
+        c c 6 6 6 c 7 7 7 7 7 7 7 7 c . 
+        c 6 6 6 c 6 7 7 7 7 7 7 7 7 6 c 
+        c 6 6 6 c 7 7 7 c 6 6 6 6 c 7 c 
+        c 6 6 6 f 7 7 7 c c 6 6 c c 7 f 
+        c 6 6 6 f 7 7 7 6 f 6 6 f 6 7 f 
+        . c 6 6 f 6 7 7 7 7 7 7 7 7 f . 
+        . c c 6 6 f 6 7 c 1 f f c 1 c . 
+        . . . c c c c c c c c c c c c . 
+        `],
+    100,
+    true
+    )
 })
 let myEnemy: Sprite = null
 let mySprite: Sprite = null
+let speed = 0
+if (game.ask("100 speed or 1000 speed for snake")) {
+    speed = 100
+} else {
+    speed = 1000
+}
 tiles.setCurrentTilemap(tilemap`level4`)
 mySprite = sprites.create(img`
     . . . . . . . f f f f f . . . . 
@@ -214,6 +349,7 @@ namespace userconfig {
     export const ARCADE_SCREEN_HEIGHT = 225
 }
 scene.cameraFollowSprite(mySprite)
+info.setScore(0)
 for (let index = 0; index < 10; index++) {
     myEnemy = sprites.create(img`
         . . . . c c c c c c c . . . . . 
@@ -233,6 +369,114 @@ for (let index = 0; index < 10; index++) {
         . . . c 6 6 6 6 1 1 1 1 1 6 f . 
         . . . . c c c c c c c c f f . . 
         `, SpriteKind.Enemy)
-    myEnemy.follow(mySprite, 66)
-    tiles.placeOnRandomTile(mySprite, sprites.castle.tileGrass2)
+    myEnemy.follow(mySprite, speed)
+    tiles.placeOnRandomTile(myEnemy, sprites.castle.tileGrass2)
+    animation.runImageAnimation(
+    myEnemy,
+    [img`
+        . . . . c c c c c c c . . . . . 
+        . . . c 6 7 7 7 7 7 6 c . . . . 
+        . . c 6 7 c 6 6 6 6 c 7 c . . . 
+        . . c 7 7 6 f 6 6 f 6 7 6 c . . 
+        . . c 7 7 7 7 7 7 7 7 7 7 c . . 
+        . . f 7 7 7 6 1 f f 1 8 7 f . . 
+        . . f 7 7 7 f 1 f f 1 f 6 f . . 
+        . . f 6 7 7 f 2 2 2 2 f f . . . 
+        . . c f 6 7 7 2 2 2 2 f c c . . 
+        . c 7 7 c c 7 7 7 7 7 7 7 7 c . 
+        c 7 7 7 6 c f 7 7 7 7 1 1 1 7 c 
+        c c 6 6 6 c c f 6 7 1 1 1 1 1 f 
+        . . c 6 6 6 c 6 6 1 1 1 1 1 1 f 
+        . . c 6 6 6 6 6 6 1 1 1 1 1 6 f 
+        . . . c 6 6 6 6 1 1 1 1 1 6 f . 
+        . . . . c c c c c c c c f f . . 
+        `,img`
+        . . . c c c c c c c . . . . . . 
+        . . c 7 f f 6 6 f f c . . . . . 
+        . c 6 7 6 6 6 6 6 6 7 c . . . . 
+        . c 7 7 7 7 7 7 7 7 7 7 c . . . 
+        . c 7 7 7 6 1 f f 1 8 7 c . . . 
+        . f 7 7 7 f 1 f f 1 f 6 f . . . 
+        . f 7 7 7 f 2 2 2 2 f 6 f . . . 
+        . f 6 7 7 f 2 2 2 2 f 6 c c . . 
+        . . c f 7 7 2 2 2 2 7 7 7 7 c . 
+        . c 7 7 c c 7 7 7 7 7 1 1 1 7 c 
+        c 7 7 7 6 c f 7 7 7 1 1 1 1 1 f 
+        c c 6 6 6 c c f 6 1 1 1 1 1 1 f 
+        . . c 6 6 6 c 6 6 1 1 1 1 1 6 f 
+        . . c 6 6 6 6 6 6 1 1 1 1 1 6 f 
+        . . . c 6 6 6 6 6 1 1 1 1 6 f . 
+        . . . . c c c c c c c c f f . . 
+        `,img`
+        . . . c c c c c c c . . . . . . 
+        . . c 7 f f 6 6 f f c . . . . . 
+        . c 6 7 6 6 6 6 6 6 7 c . . . . 
+        . c 7 7 7 7 7 7 7 7 7 7 c . . . 
+        . c 7 7 7 6 1 f f 1 8 7 c . . . 
+        . f 7 7 7 f 1 f f 1 f 6 f . . . 
+        . f 7 7 7 f 2 2 2 2 f 6 f . . . 
+        . f 6 7 7 f 2 2 2 2 f 6 c c . . 
+        . . c f 7 7 2 2 2 2 7 7 7 7 c . 
+        . c 7 7 c c 7 7 7 7 7 1 1 1 7 c 
+        c 7 7 7 6 c f 7 7 7 1 1 1 1 1 f 
+        c c 6 6 6 c c f 6 1 1 1 1 1 1 f 
+        . . c 6 6 6 c 6 6 1 1 1 1 1 6 f 
+        . . c 6 6 6 6 6 6 1 1 1 1 1 6 f 
+        . . . c 6 6 6 6 6 1 1 1 1 6 f . 
+        . . . . c c c c c c c c f f . . 
+        `,img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        c c c c c . . . . . . . . . . . 
+        c 6 7 7 7 c c . . . . . . . . . 
+        . c c 7 7 7 c c . . . . . . . . 
+        . . . c 7 7 6 c . . . . . . . . 
+        . . . c 6 6 6 c . . . . . . . . 
+        . . c c 6 6 6 c c c c c c . . . 
+        . c 6 6 6 c c 6 7 7 7 7 6 c . . 
+        c c 6 6 6 c 7 7 7 7 7 7 7 7 c . 
+        c 6 6 6 c 6 7 7 7 7 7 7 7 7 6 c 
+        c 6 6 6 c 7 7 7 c 6 6 6 6 c 7 c 
+        c 6 6 6 f 7 7 7 c c 6 6 c c 7 f 
+        c 6 6 6 f 7 7 7 6 f 6 6 f 6 7 f 
+        . c c 6 6 f 6 7 c 1 f f c 1 c . 
+        . . . c c c c c c c c c c c c . 
+        `,img`
+        c c c c c . . . . . . . . . . . 
+        c 6 7 7 7 c c . . . . . . . . . 
+        . c c 7 7 7 c c . . . . . . . . 
+        . . . c 7 7 6 c . . . . . . . . 
+        . . . c 6 6 6 c . . . . . . . . 
+        . . c c 6 6 6 c . . . . . . . . 
+        . c c 6 6 6 c c c c c c c . . . 
+        . c 6 6 6 c c 6 7 7 7 7 6 c . . 
+        c c 6 6 6 c 7 7 7 7 7 7 7 7 c . 
+        c 6 6 6 c 6 7 7 7 7 7 7 7 7 6 c 
+        c 6 6 6 c 7 7 7 c 6 6 6 6 c 7 c 
+        c 6 6 6 f 7 7 7 c c 6 6 c c 7 f 
+        c 6 6 6 f 7 7 7 6 f 6 6 f 6 7 f 
+        . c 6 6 f 6 7 7 7 7 7 7 7 7 f . 
+        . c c 6 6 f 6 7 c 1 f f c 1 c . 
+        . . . c c c c c c c c c c c c . 
+        `,img`
+        c c c c c . . . . . . . . . . . 
+        c 6 7 7 7 c c . . . . . . . . . 
+        . c c 7 7 7 c c . . . . . . . . 
+        . . . c 7 7 6 c . . . . . . . . 
+        . . . c 6 6 6 c . . . . . . . . 
+        . . c c 6 6 6 c . . . . . . . . 
+        . c c 6 6 6 c c c c c c c . . . 
+        . c 6 6 6 c c 6 7 7 7 7 6 c . . 
+        c c 6 6 6 c 7 7 7 7 7 7 7 7 c . 
+        c 6 6 6 c 6 7 7 7 7 7 7 7 7 6 c 
+        c 6 6 6 c 7 7 7 c 6 6 6 6 c 7 c 
+        c 6 6 6 f 7 7 7 c c 6 6 c c 7 f 
+        c 6 6 6 f 7 7 7 6 f 6 6 f 6 7 f 
+        . c 6 6 f 6 7 7 7 7 7 7 7 7 f . 
+        . c c 6 6 f 6 7 c 1 f f c 1 c . 
+        . . . c c c c c c c c c c c c . 
+        `],
+    100,
+    true
+    )
 }
